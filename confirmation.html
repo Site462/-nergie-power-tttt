@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de paiement</title>
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-image: url('https://image.noelshack.com/fichiers/2025/01/6/1735999097-how-is-solar-energy-useful-to-us.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            image-rendering: -webkit-optimize-contrast; /* Pour une meilleure netteté sur Chrome/Safari */
+            image-rendering: crisp-edges; /* Pour une meilleure netteté sur Firefox */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background-image: url('https://image.noelshack.com/fichiers/2025/01/6/1735999097-how-is-solar-energy-useful-to-us.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* Overlay plus léger pour mieux voir l'image */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #000; /* Texte plus foncé pour meilleure lisibilité */
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .account-info {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .account-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        .copy-button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background: #0056b3;
+            transform: scale(1.02);
+        }
+
+        .timer {
+            text-align: center;
+            margin-top: 1rem;
+            color: #dc3545;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.8rem;
+            border-radius: 4px;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .operator-info {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: #000;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="title">Confirmation de paiement</h1>
+
+            <div class="operator-info">
+                <p>Opérateur: <span id="operatorName"></span></p>
+                <p>Montant: <span id="amount"></span> FCFA</p>
+            </div>
+
+            <div class="account-info">
+                <div>
+                    <p>Veuillez copie le numéro et effectuer le paiement :</p>
+                    <p class="account-number" id="paymentNumber"></p>
+                </div>
+                <button class="copy-button" id="copyButton">Copier</button>
+            </div>
+
+            <form id="confirmationForm">
+                <div class="form-group">
+                    <label>ID de transaction</label>
+                    <input type="text" class="input" required placeholder="Entrez l'ID de transaction">
+                </div>
+
+                <div class="form-group">
+                    <label>Preuve de paiement</label>
+                    <input type="file" class="input" required accept="image/*">
+                </div>
+
+                <button type="submit" class="button">Confirmer</button>
+            </form>
+
+            <div class="timer" id="timer">Temps restant: 10:00</div>
+        </div>
+    </div>
+
+    <script>
+        // Récupération des données de la transaction
+        const transactionData = JSON.parse(localStorage.getItem('transactionData'));
+
+        // Affichage des informations
+        document.getElementById('operatorName').textContent = transactionData.operator;
+        document.getElementById('amount').textContent = transactionData.amount;
+        document.getElementById('paymentNumber').textContent = transactionData.number;
+
+        // Fonction de copie du numéro
+        document.getElementById('copyButton').addEventListener('click', () => {
+            navigator.clipboard.writeText(transactionData.number)
+                .then(() => {
+                    const button = document.getElementById('copyButton');
+                    button.textContent = 'Copié !';
+                    setTimeout(() => {
+                        button.textContent = 'Copier';
+                    }, 2000);
+                });
+        });
+
+        // Timer
+        let timeLeft = 600; // 10 minutes
+        const timerElement = document.getElementById('timer');
+        
+        const timerId = setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = 
+                `Temps restant: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerId);
+                alert('Temps écoulé ! La transaction a été annulée.');
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+
+        // Formulaire de confirmation
+        document.getElementById('confirmationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearInterval(timerId);
+            
+            // Stockage des données pour l'historique
+            transactionData.status = 'Confirmé';
+            const history = JSON.parse(localStorage.getItem('transactionHistory') || '[]');
+            history.unshift(transactionData);
+            localStorage.setItem('transactionHistory', JSON.stringify(history));
+
+            // Redirection vers la page d'historique
+            window.location.href = 'history.html';
+        });
+    </script>
+</body>
+</html>

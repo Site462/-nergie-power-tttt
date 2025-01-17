@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Client</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-image: url('https://image.noelshack.com/fichiers/2025/01/6/1735999097-how-is-solar-energy-useful-to-us.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #0088cc, #29b6f6);
+            border-radius: 2px;
+        }
+
+        .hours {
+            text-align: center;
+            background: linear-gradient(45deg, #0088cc, #29b6f6);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,136,204,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            animation: float 6s infinite;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .contact-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #0088cc, #29b6f6);
+            color: white;
+            border-radius: 50%;
+            font-size: 2rem;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,136,204,0.4);
+        }
+
+        .contact-description {
+            color: #666;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                padding: 2rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="service-card">
+            <h1 class="title">Centre d'aide</h1>
+            
+            <div class="hours">
+                <i class="far fa-clock"></i> Heures d'ouverture : 8H00 - 19H00
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-card">
+                    <h2 class="contact-title">Assistance N°1</h2>
+                    <a href="#" class="telegram-btn">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <p class="contact-description">
+                        Support pour les paiements MTN, Moov et USDT
+                    </p>
+                </div>
+
+                <div class="contact-card">
+                    <h2 class="contact-title">Assistance N°2</h2>
+                    <a href="#" class="telegram-btn">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <p class="contact-description">
+                        Support pour les paiements Orange Wave
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
