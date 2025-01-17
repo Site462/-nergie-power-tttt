@@ -2,120 +2,69 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Historique des retraits</title>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Solar Green Retrait</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Variables globales */
         :root {
-            --bg-image: url('https://image.noelshack.com/fichiers/2025/01/4/1735813164-how-is-solar-energy-useful-to-us.jpg');
-            --section-bg-image: url('https://image.noelshack.com/fichiers/2025/01/4/1735813164-how-is-solar-energy-useful-to-us.jpg');
-            
-            /* Couleurs */
             --text-color: #ffffff;
             --text-secondary: #dddddd;
             --amount-color: #ff6b6b;
             --fees-color: #ffd700;
             --success-color: #4CAF50;
             --net-amount-color: #00ff9d;
-            
-            /* Espacements */
-            --spacing-sm: 10px;
-            --spacing-md: 20px;
-            --spacing-lg: 30px;
-            
-            /* Border radius */
+            --operator-color: #4dabf7;
+            --phone-color: #ffd43b;
+            --spacing-xs: 5px;
+            --spacing-sm: 8px;
+            --spacing-md: 12px;
+            --spacing-lg: 20px;
             --radius-sm: 8px;
-            --radius-md: 15px;
-            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
         }
 
-        /* Reset et styles de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             min-height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                        var(--bg-image) center/cover fixed;
+                        url('https://image.noelshack.com/fichiers/2025/03/5/1737074354-images-8.jpeg') center/cover fixed;
             color: var(--text-color);
-            padding: var(--spacing-md);
+            padding: 0;
+            margin: 0;
+            width: 100%;
         }
 
         .container {
-            background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-                        var(--section-bg-image) center/cover;
-            backdrop-filter: blur(10px);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-lg);
             width: 100%;
-            max-width: 800px;
-            margin: var(--spacing-md) auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            backdrop-filter: blur(5px);
-            z-index: 0;
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
+            max-width: 100%;
+            margin: 0;
+            padding: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.05);
+            min-height: 100vh;
         }
 
         h1 {
             text-align: center;
-            margin-bottom: var(--spacing-lg);
-            font-size: 2.2rem;
+            margin: var(--spacing-md) 0;
+            font-size: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            position: relative;
-            padding-bottom: var(--spacing-sm);
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--success-color),
-                transparent
-            );
+            padding: 0 var(--spacing-sm);
         }
 
         .history-item {
             background: rgba(0, 0, 0, 0.6);
             margin-bottom: var(--spacing-md);
-            padding: 25px;
+            padding: var(--spacing-md);
             border-radius: var(--radius-md);
-            transition: transform 0.3s ease,
-                        background-color 0.3s ease,
-                        box-shadow 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-
-        .history-item:hover {
-            transform: translateY(-3px);
-            background: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .history-header {
@@ -123,242 +72,284 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: var(--spacing-sm);
-            padding-bottom: var(--spacing-sm);
+            padding-bottom: var(--spacing-xs);
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .amount {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: var(--amount-color);
-            display: flex;
-            align-items: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .amount::before {
             content: '\f068';
             font-family: 'Font Awesome 6 Free';
-            margin-right: var(--spacing-sm);
-            font-size: 1rem;
+            font-weight: 900;
+            margin-right: var(--spacing-xs);
+            font-size: 0.9rem;
+        }
+
+        .status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
         }
 
         .fees {
             color: var(--fees-color);
-            font-size: 1.1rem;
-            margin: var(--spacing-sm) 0;
-            display: flex;
-            align-items: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 0.9rem;
+            margin: var(--spacing-xs) 0;
         }
 
         .fees::before {
             content: '\f0d6';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            margin-right: var(--spacing-sm);
+            margin-right: var(--spacing-xs);
+            font-size: 0.8rem;
         }
 
-        /* Nouveau style pour le montant net */
         .net-amount {
             color: var(--net-amount-color);
-            font-size: 1.3rem;
+            font-size: 1rem;
             font-weight: bold;
-            margin: var(--spacing-sm) 0;
-            display: flex;
-            align-items: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin: var(--spacing-xs) 0;
         }
 
         .net-amount::before {
             content: '\f155';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            margin-right: var(--spacing-sm);
+            margin-right: var(--spacing-xs);
+            font-size: 0.9rem;
         }
 
-        .amount-details {
-            background: rgba(0, 0, 0, 0.3);
+        .transaction-info {
+            background: rgba(255, 255, 255, 0.1);
             border-radius: var(--radius-sm);
             padding: var(--spacing-sm);
-            margin-top: var(--spacing-sm);
+            margin: var(--spacing-xs) 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
         }
 
-        .status {
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(76, 175, 80, 0.2);
-            backdrop-filter: blur(5px);
+        .operator, .phone-number {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 0.9rem;
         }
 
-        .status.completed {
-            background: rgba(76, 175, 80, 0.3);
-            color: var(--success-color);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        .operator {
+            color: var(--operator-color);
+        }
+
+        .operator::before {
+            content: '\f2bd';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+        }
+
+        .phone-number {
+            color: var(--phone-color);
+        }
+
+        .phone-number::before {
+            content: '\f095';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
         }
 
         .date {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-top: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .date::before {
-            content: '\f017';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            margin-right: var(--spacing-sm);
-            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: var(--spacing-xs);
         }
 
         .no-history {
             text-align: center;
-            padding: var(--spacing-lg);
+            padding: var(--spacing-md);
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             background: rgba(0, 0, 0, 0.5);
             border-radius: var(--radius-md);
-            margin: var(--spacing-md) 0;
-            backdrop-filter: blur(5px);
+            margin: var(--spacing-md) var(--spacing-sm);
         }
 
-        @media (max-width: 600px) {
-            :root {
-                --spacing-lg: 20px;
-                --spacing-md: 15px;
-                --spacing-sm: 8px;
+        .loading {
+            text-align: center;
+            padding: var(--spacing-md);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) var(--spacing-sm);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Ajustements spécifiques pour très petits écrans */
+        @media (max-width: 320px) {
+            .history-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-xs);
             }
 
-            .container {
-                margin: var(--spacing-sm);
-                padding: var(--spacing-md);
-            }
-
-            .history-item {
-                padding: var(--spacing-md);
+            .status {
+                align-self: flex-end;
             }
 
             .amount, .net-amount {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
             .fees {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="content-wrapper">
-            <h1>Solar green retrait </h1>
-            <div id="history-list">
-                <!-- Les éléments d'historique seront ajoutés ici dynamiquement -->
+        <h1>Historique de retrait</h1>
+        <div id="history-list">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i> Chargement...
             </div>
         </div>
     </div>
 
     <script type="module">
+        // Le reste du code JavaScript reste identique
         // Configuration Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB8hezVsx76SnhCeeYi-04wIvcoV2zgoF0",
             authDomain: "solar-edge-a9bee.firebaseapp.com",
             databaseURL: "https://solar-edge-a9bee-default-rtdb.firebaseio.com",
             projectId: "solar-edge-a9bee",
-            storageBucket: "solar-edge-a9bee.firebasestorage.app",
+            storageBucket: "solar-edge-a9bee.appspot.com",
             messagingSenderId: "373374898393",
             appId: "1:373374898393:web:39afe1cfdeca18e712eec8"
         };
 
-        // Importation des modules Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+        try {
+            // Importation des modules Firebase
+            const { initializeApp } = await import("https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js");
+            const { getAuth, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js");
+            const { getDatabase, ref, onValue, get } = await import("https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js");
 
-        // Initialisation Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const database = getDatabase(app);
+            // Initialisation Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const database = getDatabase(app);
 
-        // Fonctions utilitaires
-        function formatAmount(amount) {
-            return amount.toLocaleString('fr-FR') + ' FCFA';
-        }
+            // Fonctions utilitaires
+            const formatAmount = (amount) => (amount || 0).toLocaleString('fr-FR') + ' FCFA';
+            
+            const formatPhoneNumber = (phone) => {
+                if (!phone) return 'Non spécifié';
+                return phone.toString().replace(/(\d{2})(?=\d)/g, "$1 ");
+            };
 
-        function formatDate(timestamp) {
-            const date = new Date(timestamp);
-            return date.toLocaleString('fr-FR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
+            const formatDate = (timestamp) => {
+                if (!timestamp) return 'Date non spécifiée';
+                return new Date(timestamp).toLocaleString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            };
+
+            const calculateNetAmount = (amount, fees) => (amount || 0) - (fees || 0);
+
+            // Fonction d'affichage de l'historique
+            async function displayWithdrawalHistory(userId, history) {
+                const historyList = document.getElementById('history-list');
+                
+                try {
+                    const configSnapshot = await get(ref(database, `users/${userId}/withdrawalConfig`));
+                    const configData = configSnapshot.val() || {};
+
+                    if (!history || Object.keys(history).length === 0) {
+                        historyList.innerHTML = `
+                            <div class="no-history">
+                                <i class="fas fa-history"></i> 
+                                Aucun historique de retrait
+                            </div>`;
+                        return;
+                    }
+
+                    const historyHTML = Object.entries(history)
+                        .sort(([, a], [, b]) => (b.timestamp || 0) - (a.timestamp || 0))
+                        .map(([key, withdrawal]) => {
+                            const amount = withdrawal.amount || 0;
+                            const fees = withdrawal.fees || 0;
+                            const netAmount = calculateNetAmount(amount, fees);
+                            
+                            return `
+                                <div class="history-item">
+                                    <div class="history-header">
+                                        <span class="amount">${formatAmount(amount)}</span>
+                                        <span class="status">${withdrawal.status || 'En attente'}</span>
+                                    </div>
+                                    <div class="fees">Frais: ${formatAmount(fees)}</div>
+                                    <div class="net-amount">Montant net: ${formatAmount(netAmount)}</div>
+                                    <div class="transaction-info">
+                                        <span class="operator">${configData.operator || 'Non spécifié'}</span>
+                                        <span class="phone-number">${formatPhoneNumber(configData.phone)}</span>
+                                    </div>
+                                    <div class="date">${formatDate(withdrawal.timestamp)}</div>
+                                </div>`;
+                        }).join('');
+
+                    historyList.innerHTML = historyHTML;
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    historyList.innerHTML = `
+                        <div class="error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Une erreur est survenue lors du chargement des données
+                        </div>`;
+                }
+            }
+
+            // Gestion de l'authentification
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const historyRef = ref(database, `users/${user.uid}/withdrawalHistory`);
+                    onValue(historyRef, (snapshot) => {
+                        displayWithdrawalHistory(user.uid, snapshot.val());
+                    });
+                } else {
+                    window.location.href = 'login.html';
+                }
             });
+
+        } catch (error) {
+            console.error('Erreur de chargement Firebase:', error);
+            document.getElementById('history-list').innerHTML = `
+                <div class="error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Erreur de chargement de l'application
+                </div>`;
         }
-
-        // Calcul du montant net
-        function calculateNetAmount(amount, fees) {
-            return amount - fees;
-        }
-
-        // Fonction d'affichage de l'historique
-        function displayWithdrawalHistory(history) {
-            const historyList = document.getElementById('history-list');
-            historyList.innerHTML = '';
-
-            if (!history || Object.keys(history).length === 0) {
-                historyList.innerHTML = `
-                    <div class="no-history">
-                        <i class="fas fa-history"></i> 
-                        Aucun historique de retrait
-                    </div>`;
-                return;
-            }
-
-            // Tri et affichage des retraits
-            Object.entries(history)
-                .sort(([, a], [, b]) => b.timestamp - a.timestamp)
-                .forEach(([key, withdrawal]) => {
-                    const netAmount = calculateNetAmount(withdrawal.amount, withdrawal.fees);
-                    const historyItem = document.createElement('div');
-                    historyItem.className = 'history-item';
-                    historyItem.innerHTML = `
-                        <div class="history-header">
-                            <span class="amount">${formatAmount(withdrawal.amount)}</span>
-                            <span class="status ${withdrawal.status.toLowerCase()}">
-                                ${withdrawal.status}
-                            </span>
-                        </div>
-                        <div class="amount-details">
-                            <div class="fees">Frais: ${formatAmount(withdrawal.fees)}</div>
-                            <div class="net-amount">Montant net: ${formatAmount(netAmount)}</div>
-                        </div>
-                        <div class="date">${formatDate(withdrawal.timestamp)}</div>
-                    `;
-                    historyList.appendChild(historyItem);
-                });
-        }
-
-        // Gestion de l'authentification
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const historyRef = ref(database, `users/${user.uid}/withdrawalHistory`);
-                onValue(historyRef, (snapshot) => {
-                    const history = snapshot.val();
-                    displayWithdrawalHistory(history);
-                });
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
     </script>
 </body>
 </html>
