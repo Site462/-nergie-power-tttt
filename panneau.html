@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Panneaux Solaires</title>
+    <title>Mes LV</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
             margin: 0; 
             padding: 15px; 
-            background-image: url('https://image.noelshack.com/fichiers/2025/01/5/1735906836-how-is-solar-energy-useful-to-us.jpg'); 
+            background-image: url('https://image.noelshack.com/fichiers/2025/03/5/1737074354-images-8.jpeg'); 
             background-size: cover; 
             background-position: center; 
             background-attachment: fixed; 
@@ -128,17 +128,17 @@
 <body>
     <div class="notification"></div>
     <div id="products-page">
-        <h1>Mes Panneaux Solaires</h1>
+        <h1>Mes LV</h1>
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-label">Total de Produits</div>
+                <div class="stat-label">Total de LV</div>
                 <div class="stat-value" id="total-products">0</div>
-                <div class="stat-label">Panneaux installés</div>
+                <div class="stat-label">LV installés</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Revenus Totaux</div>
+                <div class="stat-label">Revenus gagner</div>
                 <div class="stat-value" id="total-revenue">0</div>
-                <div class="stat-label">FCFA gagnés</div>
+                <div class="stat-label">Toujours on es premier</div>
             </div>
         </div>
         <div id="products-container">
@@ -264,9 +264,9 @@
 
                     return `
                         <div class="product-card">
-                            <img src="https://image.noelshack.com/fichiers/2025/01/5/1735919832-fonctionnement-panneau-solaire-le-guide-la-maison-saint-gobain-01.jpg" alt="Panneau Solaire ${investment.productId}" class="product-image">
+                            <img src="https://image.noelshack.com/fichiers/2025/03/5/1737074354-images-8.jpeg" alt="Panneau Solaire ${investment.productId}" class="product-image">
                             <div class="product-info">
-                                <h2>Panneau G${investment.productId}</h2>
+                                <h2>Niveau LV${investment.productId}</h2>
                                 <p><strong>Revenus journaliers:</strong> ${config.dailyRevenue.toLocaleString()} FCFA</p>
                                 <p><strong>Date d'installation:</strong> ${new Date(investment.timestamp).toLocaleDateString()}</p>
                                 
